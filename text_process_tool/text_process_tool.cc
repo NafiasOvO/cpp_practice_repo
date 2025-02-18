@@ -23,8 +23,16 @@ public:
         }
     }
 
-    void printSorted(){
-        
+    void printSorted()
+    {
+        using namespace std;
+        vector<pair<string, int>> vec(wordCount.begin(), wordCount.end());
+        sort(vec.begin(), vec.end(), [](auto &a, auto &b)
+             { return a.second > b.second; });
+        for (const auto &item : vec)
+        {
+            cout << item.first << ":" << item.second << endl;
+        }
     }
 };
 
@@ -34,4 +42,12 @@ WordCounter::WordCounter(/* args */)
 
 WordCounter::~WordCounter()
 {
+}
+
+int main()
+{
+    WordCounter counter;
+    counter.loadFile("test.txt");
+    counter.printSorted();
+    return 0;
 }
